@@ -1,14 +1,15 @@
-import { GET_MOVIE } from "../constants/MovieConstant";
+import { GET_MOVIE_DETAIL_BY_THEATERS } from "../constants/TheaterConstant";
 
 let initialState = {
-  movie: {},
+  movieDetail: {},
 };
+
 export const movieReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case GET_MOVIE:
+    case GET_MOVIE_DETAIL_BY_THEATERS:
       return {
         ...state,
-        movie: payload,
+        movieDetail: payload,
       };
 
     default:

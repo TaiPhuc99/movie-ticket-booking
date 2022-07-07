@@ -1,4 +1,3 @@
-export const GET_MOVIE = "GET_MOVIE";
 export const GET_MOVIE_LIST = "GET_MOVIE_LIST";
 export const GET_BANNER_LIST = "GET_BANNER_LIST";
 export const GET_MOVIE_SHOWING = "GET_MOVIE_SHOWING";

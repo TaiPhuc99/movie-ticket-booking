@@ -5,8 +5,10 @@ export const MovieService = {
     return httpsBase.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`);
   },
 
-  getDetailMovie: (idMovie) => {
-    return httpsBase.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${idMovie}`);
+  getMovieDetailByTheaters: (idMovie) => {
+    return httpsBase.get(
+      `/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${idMovie}`
+    );
   },
 
   getMovieBanners: () => {
