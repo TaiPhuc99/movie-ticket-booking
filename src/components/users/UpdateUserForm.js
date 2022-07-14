@@ -51,7 +51,7 @@ export default function UpdateUserForm() {
         .required("*Field is required!"),
     }),
     onSubmit: (values) => {
-      console.log("values", values);
+      // console.log("values", values);
       UserService.updateUserAccount(values)
         .then((res) => {
           //   console.log(res);

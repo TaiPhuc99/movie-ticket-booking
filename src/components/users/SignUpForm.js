@@ -48,7 +48,7 @@ export default function SignUpForm() {
         .required("*Field is required!"),
     }),
     onSubmit: (values) => {
-      console.log("values", values);
+      // console.log("values", values);
       UserService.newUserSignUp(values)
         .then((res) => {
           // console.log(res);
