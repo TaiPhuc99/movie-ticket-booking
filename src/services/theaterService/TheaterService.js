@@ -1,4 +1,4 @@
-import { GROUP_ID, httpsBase } from "../base/ConfigURL";
+import httpsBase, { GROUP_ID } from "../base/ConfigURL";
 
 export const TheaterService = {
   getTheaterClustersInfo: () => {

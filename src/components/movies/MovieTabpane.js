@@ -15,9 +15,7 @@ export default function MovieTabpane({ theaterClusters }) {
           tab={
             <img
               src={theaterCluster.logo}
-              className="rounded-full"
-              width="50"
-              borderBottom="1px solid rgba(0,0,0,0.2)"
+              className="rounded-full sm:w-[50px] w-[40px]"
             />
           }
           key={`clusters-${index}`}
@@ -29,47 +27,19 @@ export default function MovieTabpane({ theaterClusters }) {
                 <TabPane
                   tab={
                     <div
+                      className="xl:w-[300px] lg:w-[250px] sm:w-[200px] w-[120px] flex flex-col text-left pl-0"
                       style={{
-                        width: "300px",
-                        borderBottom: "1px solid rgba(0,0,0,0.1)",
-                        display: "flex flex-column",
+                        borderBottom: "1px solid rgb(121, 147, 195)",
                       }}
                     >
-                      <div
-                        className="text-left"
-                        style={{
-                          color: "#108f3e",
-                          fontWeight: 500,
-                          lineHeight: 1.4,
-                          fontSize: "14px",
-                          textTransform: "uppercase",
-                        }}
-                      >
+                      <div className="text-left text-white font-medium leading-normal uppercase">
                         {theaters.tenCumRap}
                       </div>
-                      <p
-                        style={{
-                          color: "#757575",
-                          fontWeight: 400,
-                          fontSize: "12px",
-                          lineHeight: 1.6,
-                          letterSpacing: "0.0075rem",
-                          textAlign: "left",
-                          textTransform: "uppercase",
-                        }}
-                      >
+                      <p className="text font-normal text-[12px] leading-[1.6] tracking-[0.0075rem] text-left uppercase overflow-hidden text-ellipsis">
                         {theaters.diaChi}
                       </p>
-                      <p
-                        style={{
-                          fontWeight: 500,
-                          lineHeight: 1.75,
-                          textAlign: "left",
-                          color: "#fb4226",
-                          fontSize: "12px",
-                          textTransform: "lowercase",
-                        }}
-                      >
+
+                      <p className="font-medium leading-[1.75] text-left text-yellow-500 text-[12px] lowercase mb-[5px]">
                         [Detail]
                       </p>
                     </div>
@@ -77,51 +47,56 @@ export default function MovieTabpane({ theaterClusters }) {
                   key={`theaters-${index}`}
                 >
                   {/* Render List Movie for each Theater */}
-                  {theaters.danhSachPhim?.map((movie, index) => {
-                    return (
-                      <Fragment key={`movie-theater-${index}`}>
-                        <div className="my-5">
-                          <div style={{ display: "flex" }}>
-                            <img
-                              src={movie.hinhAnh}
-                              alt={movie.hinhAnh}
-                              width={50}
-                              height={50}
-                            />
-                            <div className="ml-2">
-                              <p
-                                style={{
-                                  fontSize: "1rem",
-                                  fontWeight: 500,
-                                  lineHeight: "22px",
-                                }}
-                              >
-                                {movie.tenPhim}
-                              </p>
-                              <div className="grid grid-cols-2 gap-6">
-                                {/* Render Time Streaming */}
-                                {movie.lstLichChieuTheoPhim
-                                  ?.slice(0, 4)
-                                  .map((onStream, index) => {
-                                    return (
-                                      <Link
-                                        to={`/detail/${movie.maPhim}`}
-                                        key={`onStream-${index}`}
-                                      >
-                                        {moment(
-                                          onStream.ngayChieuGioChieu
-                                        ).format("hh:mm A")}
-                                      </Link>
-                                    );
-                                  })}
+                  <div className="h-[720px] overflow-y-scroll">
+                    {theaters.danhSachPhim?.map((movie, index) => {
+                      return (
+                        <Fragment key={`movie-theater-${index}`}>
+                          <div className="my-2">
+                            <div className="flex lg:flex-row flex-col justify-center lg:justify-start items-center">
+                              <img
+                                src={movie.hinhAnh}
+                                alt={movie.hinhAnh}
+                                className="lg:ml-[20px]"
+                                width={100}
+                                height={100}
+                              />
+                              <div className="lg:ml-5">
+                                <p className="lg:text-[1.15rem] font-medium lg:leading-[22px] sm:text[1rem] sm:leading-5 text-[0.9rem] leading-3 text-center lg:text-left py-3 lg:py-0 text-white">
+                                  {movie.tenPhim}
+                                </p>
+                                <div className="grid grid-cols-2 gap-4 mt-3">
+                                  {/* Render Time Streaming */}
+                                  {movie.lstLichChieuTheoPhim
+                                    ?.slice(0, 4)
+                                    .map((onStream, index) => {
+                                      return (
+                                        <div className="text-white bg-showtime border-solid border-0 rounded-sm sm:p-2 p-1">
+                                          <Link
+                                            to={`/booking/${onStream.maLichChieu}`}
+                                            key={`onStream-${index}`}
+                                            style={{ textDecoration: "none" }}
+                                          >
+                                            {moment(
+                                              onStream.ngayChieuGioChieu
+                                            ).format("hh:mm A")}
+                                          </Link>
+                                        </div>
+                                      );
+                                    })}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <hr style={{ width: "80%" }} />
-                      </Fragment>
-                    );
-                  })}
+                          <hr
+                            className="w-full"
+                            style={{
+                              color: "rgb(121, 147, 195)",
+                            }}
+                          />
+                        </Fragment>
+                      );
+                    })}
+                  </div>
                 </TabPane>
               );
             })}
@@ -131,5 +106,16 @@ export default function MovieTabpane({ theaterClusters }) {
     });
   };
 
-  return <Tabs tabPosition="left">{renderTheaterClusters()}</Tabs>;
+  return (
+    <Tabs
+      id="showtimes"
+      tabPosition="left"
+      className="h-[720px] w-full"
+      style={{
+        border: "1px solid rgb(121, 147, 195)",
+      }}
+    >
+      {renderTheaterClusters()}
+    </Tabs>
+  );
 }

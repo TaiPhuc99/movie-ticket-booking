@@ -1,7 +1,7 @@
 import React from "react";
-import SignUpForm from "../components/users/SignUpForm";
+import UpdateUserForm from "../components/users/UpdateUserForm";
 
-export default function SignUpPage() {
+export default function ProfileUpdatePage() {
   return (
     <div className="w-full h-screen">
       <img
@@ -10,13 +10,13 @@ export default function SignUpPage() {
         alt="/"
       />
       <div className="bg-black/60 fixed top-0 left-0 w-full h-screen"></div>
-      <div className="absolute top-0 left-0 w-full h-auto px-4 py-8 z-50">
+      <div className="absolute top-0 left-0 w-full h-auto px-4 py-8 z-30">
         <div className="max-w-[450px] h-auto mx-auto bg-black/75 text-white">
           <div className="max-w-[320px] h-auto mx-auto py-4">
             <p className="text-2xl font-bold text-2 text-center">
-              Let's join with <span className="text-3 uppercase">Cinemax</span>
+              Update Your Information
             </p>
-            <SignUpForm />
+            <UpdateUserForm />
           </div>
         </div>
       </div>

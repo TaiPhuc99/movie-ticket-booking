@@ -1,7 +1,7 @@
 import { GET_THEATER_CLUSTERS } from "../constants/TheaterConstant";
 
 let initialState = {
-  theaterClusters: null,
+  theaterClusters: [],
 };
 
 export const theaterReducer = (state = initialState, { type, payload }) => {

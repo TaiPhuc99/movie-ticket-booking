@@ -2,25 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: rgb(8, 21, 72);
+  --primary-color-2: rgb(20, 39, 109);
+  --secondary-color: rgb(121, 147, 195);
+  --text-color: rgb(78, 96, 136);
+  --button-color: rgb(94, 57, 240);
+  --effect-color: rgb(25, 46, 126);
+  --effect-color-2: rgb(34, 203, 191);
+  --effect-color-3: rgb(255, 192, 0);
+  --effect-color-4: rgb(216, 74, 70);
+  --effect-color-5: rgb(247, 180, 80);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: white;
+  background-color: rgb(8, 21, 72);
   font-family: "Lato", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+a:hover {
+  color: black;
+}
+
+/* Global CSS */
+.template {
+  background-color: var(--primary-color);
+  color: beige;
+}
+
+.carousel-bg {
+  background-color: var(--primary-color-2);
+  color: beige;
+}
+
+.text {
+  color: var(--text-color);
+}
+
+.text-2 {
+  color: var(--effect-color-2);
+}
+
+.text-3 {
+  color: var(--effect-color-4);
+}
+
+.bg-showtime {
+  background-color: rgb(28, 33, 46);
+  transition: 0.2s ease;
+}
+
+.bg-showtime:hover {
+  background-color: var(--effect-color-3);
+  color: black;
+}
+
+.button-color {
+  background-color: var(--button-color);
+}
+
+.button-color-2 {
+  background-color: var(--effect-color);
+}
+
+.button-color-3 {
+  background-color: var(--effect-color-2);
+}
+
+.button-color-4 {
+  background-color: var(--secondary-color);
+}
+
+/* Global CSS */
+
+/* Slick Start */
 .slick-prev::before,
 .slick-next::before {
   color: gray;
   font-size: 1.5rem;
 }
 
-.slick-list {
-  margin-left: 40px;
+.slick-track .slick-slide {
+  margin-bottom: 25px;
 }
 
 .slick-list .slick-track .slick-current {
@@ -31,61 +104,125 @@ body {
   margin-left: 0;
 }
 
+.ant-carousel .slick-dots-bottom {
+  bottom: 35px;
+}
+
 .slick-dots li button:before {
   display: none;
 }
 
-.width-item {
+/* Slick End */
+.flip-card {
   width: 100% !important;
+  margin: 0 auto !important;
 }
 
-.box1 {
+iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Ant Design */
+.ant-tabs-content-holder {
+  overflow: hidden;
+}
+
+.ant-tabs-left
+  > .ant-tabs-content-holder
+  > .ant-tabs-content
+  > .ant-tabs-tabpane {
+  padding-left: 0;
+}
+
+.ant-tabs-left > .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab {
+  margin: 8px 0;
+}
+
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-list {
+  color: whitesmoke;
+}
+
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-more {
+  display: block;
+  color: var(--effect-color-5);
+  font-size: larger;
+}
+
+.ant-tabs-tab {
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.ant-tabs-top > .ant-tabs-nav:before {
+  border-bottom: none;
+}
+
+.ant-tabs-left > .ant-tabs-nav .ant-tabs-tab {
+  padding: 10px 12px;
+}
+
+/* Ant Design */
+
+/* Detail */
+.box {
   margin: 0 auto;
   min-height: 100vh;
   min-width: 100vw;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(8, 21, 72, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 10px;
   backdrop-filter: blur(5px);
 }
 
-.ant-tabs-content-holder {
-  overflow: hidden;
-}
-
 #trapezoid {
-  border-bottom: 50px solid gray;
+  border-bottom: 70px solid gray;
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
   height: 0;
   width: 80%;
   opacity: 0.3;
+  transform: translateY(-12px);
   filter: drop-shadow(0px 45px 28px #000000);
   -webkit-filter: drop-shadow(0px 45px 28px #000000);
   -moz-filter: drop-shadow(0px 45px 28px #000000);
+}
+/* Detail */
+
+/* Booking Seat */
+.screen {
+  background-color: #fff;
+  height: 100px;
+  width: 75%;
+  transform: rotateX(45deg);
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
 }
 
 .seat {
   width: 35px;
   height: 35px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   margin: 8px;
-  background-color: rgb(123, 122, 122);
+  background-color: #444451;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 .occupied-seat {
-  background-color: rgb(232, 76, 76);
+  background-color: var(--effect-color-2);
   cursor: no-drop;
 }
 
-.empty-seat {
+.select-seat {
   background-color: rgb(18, 176, 18) !important;
 }
 
 .vip-seat {
-  background-color: rgb(228, 74, 8);
+  background-color: var(--effect-color-5);
 }
 
 .currentUser-occupied-seat {
@@ -93,4 +230,62 @@ body {
   box-shadow: -1px 2px 18px -6px orange;
   color: orange !important;
   border: 1px solid orange;
+}
+
+.account-booking {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 200px;
+}
+/* Booking Seat */
+@media (max-width: 870px) {
+  .seat {
+    height: 27px;
+    width: 27px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin: 5px;
+  }
+}
+
+@media (max-width: 650px) {
+  .seat {
+    height: 20px;
+    width: 20px;
+    border-top-left-radius: 7.5px;
+    border-top-right-radius: 7.5px;
+    margin: 5px;
+  }
+
+  .account-booking {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 150px;
+  }
+
+  #trapezoid {
+    border-bottom: 50px solid gray;
+  }
+}
+
+@media (max-width: 450px) {
+  .seat {
+    height: 25px;
+    width: 25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .seat {
+    height: 20px;
+    width: 20px;
+    border-top-left-radius: 7.5px;
+    border-top-right-radius: 7.5px;
+    margin: 10px;
+  }
 }

@@ -1,9 +1,16 @@
 import { ThongTinLichChieu } from "../../_core/TicketDetailModel";
-import { GET_TICKET_DETAIL, SEAT_BOOKING } from "../constants/BookingConstant";
+import {
+  CHANGE_TAB,
+  CHANGE_TAB_ACTIVE,
+  COMPLETE_BOOKING,
+  GET_TICKET_DETAIL,
+  SEAT_BOOKING,
+} from "../constants/BookingConstant";
 
 let initialState = {
   ticketDetail: new ThongTinLichChieu(),
   seatListChoice: [],
+  tabActive: 1,
 };
 
 export const bookingReducer = (state = initialState, { type, payload }) => {
@@ -24,6 +31,21 @@ export const bookingReducer = (state = initialState, { type, payload }) => {
         newSeatListChoice.push(payload);
       }
       return { ...state, seatListChoice: newSeatListChoice };
+    }
+
+    case COMPLETE_BOOKING: {
+      state.seatListChoice = [];
+      return { ...state };
+    }
+
+    case CHANGE_TAB_ACTIVE: {
+      state.tabActive = 2;
+      return { ...state };
+    }
+
+    case CHANGE_TAB: {
+      state.tabActive = payload;
+      return { ...state };
     }
 
     default:

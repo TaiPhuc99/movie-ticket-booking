@@ -11,13 +11,6 @@ export const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_CURRENT_USER: {
       state.userLogin = payload;
-      //   console.log(payload);
-
-      // Save User to Local Storage
-      localStorageService.setUserLocal(payload);
-
-      // Save User AccessToken to Local Storage
-      localStorageService.setUserLocalToken(payload.accessToken);
       return { ...state };
     }
 

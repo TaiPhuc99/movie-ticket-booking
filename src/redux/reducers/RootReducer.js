@@ -5,6 +5,7 @@ import { carouselReducer } from "./CarouselReducer";
 import { theaterReducer } from "./TheaterReducer";
 import { userReducer } from "./UserReducer";
 import { bookingReducer } from "./BookingReducer";
+import { spinnerReducer } from "./SpinnerReducer";
 
 export const rootReducer = combineReducers({
   movieReducer,
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
   theaterReducer,
   userReducer,
   bookingReducer,
+  spinnerReducer,
 });

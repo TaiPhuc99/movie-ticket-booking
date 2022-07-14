@@ -1,5 +1,5 @@
 import { ThongTinDatVe } from "../../_core/TicketBookingModel";
-import { httpsBase, httpsBaseAccessToken } from "../base/ConfigURL";
+import httpsBase  from "../base/ConfigURL";
 
 export const BookingService = {
   getTicketRooms: (idShowtime) => {
@@ -8,7 +8,8 @@ export const BookingService = {
     );
   },
 
-  ticketBooking: (ticket = new ThongTinDatVe(), token) => {
-    return httpsBaseAccessToken("api/QuanLyDatVe/DatVe", ticket, token);
+  ticketBooking: (ticket = new ThongTinDatVe()) => {
+    // return httpsBaseAccessToken("api/QuanLyDatVe/DatVe", ticket, token);
+    return httpsBase.post("api/QuanLyDatVe/DatVe", ticket);
   },
 };

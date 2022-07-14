@@ -11,7 +11,7 @@ const contentStyle = {
   textAlign: "center",
   background: "#364d79",
   backgroundPosition: "center center",
-  backgroundSize: "100%",
+  backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
 };
 
@@ -26,7 +26,7 @@ export default function MovieCarousel() {
   }, []);
 
   return (
-    <Carousel effect="fade">
+    <Carousel effect="fade" autoplay={true}>
       {carouselBannerList?.map((banner, index) => {
         return (
           <div key={`banner-${index}`}>

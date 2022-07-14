@@ -8,10 +8,14 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SpinnerTemplate from "./templates/SpinnerTemplate";
+import ProfilePage from "./pages/ProfilePage";
+import ProfileUpdatePage from "./pages/ProfileUpdatePage";
 
 function App() {
   return (
     <>
+      <SpinnerTemplate />
       <Router>
         <Routes>
           <Route path="/" element={<Layout Component={<HomePage />} />} />
@@ -25,6 +29,11 @@ function App() {
             path="/booking/:idShowtime"
             element={<LayoutBooking Component={<BookingPage />} />}
           />
+          <Route
+            path="/profile"
+            element={<Layout Component={<ProfilePage />} />}
+          />
+          <Route path="/update-account" element={<ProfileUpdatePage />} />
         </Routes>
       </Router>
 

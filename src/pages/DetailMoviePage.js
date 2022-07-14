@@ -15,7 +15,6 @@ export default function DetailMoviePage() {
   const { movieDetail } = useSelector((state) => {
     return state.movieReducer;
   });
-  // console.log(movieDetail);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,70 +27,72 @@ export default function DetailMoviePage() {
       return (
         <TabPane
           tab={
-            <div className="flex flex-row items-center justify-center">
+            <div className="flex sm:flex-row flex-col items-center justify-center sm:w-full w-[100px]">
               <img
                 src={showTimes.logo}
                 alt={showTimes.logo}
-                width="50"
-                className="rounded-full "
+                className="rounded-full sm:w-[50px] w-[40px]"
               />
-              <p
-                className="text-center ml-2"
-                style={{ textTransform: "uppercase", fontWeight: "bold" }}
-              >
+              <p className="text-center text-white sm:ml-2 mt-3 uppercase sm:font-medium text-[12px]">
                 {showTimes.tenHeThongRap}
               </p>
             </div>
           }
           key={`streamTime-${index}`}
         >
-          {showTimes.cumRapChieu?.map((theaters, index) => {
-            return (
-              <div className="mt-5" key={`detail-theater-${index}`}>
-                <div className="flex flex-row">
-                  <img
-                    src={theaters.hinhAnh}
-                    alt={theaters.hinhAnh}
-                    style={{ width: 60, height: 60 }}
-                  />
-                  <div className="ml-2">
-                    <p
-                      style={{
-                        fontSize: 20,
-                        fontWeight: "bold",
-                        lineHeight: "1",
-                        textTransform: "uppercase",
-                      }}
-                    >
-                      {theaters.tenCumRap}
-                    </p>
-                    <p className="text-gray-400" style={{ marginTop: 0 }}>
-                      {theaters.diaChi}
-                    </p>
-                  </div>
-                </div>
-                <div className="detail-showtimes grid grid-cols-4 mt-3 border-b-2">
-                  {theaters.lichChieuPhim
-                    ?.slice(0, 12)
-                    .map((detailShowTime, index) => {
-                      return (
-                        <div className="w-16 h-6 bg-gray-800 mb-1 text-white hover:bg-green-700 hover:text-white flex justify-center items-center rounded">
-                          <Link
-                            to={`/booking/${detailShowTime.maLichChieu}`}
-                            key={`order-showTime-${index}`}
-                            className="col-span-1 font-bold"
-                          >
-                            {moment(detailShowTime.ngayChieuGioChieu).format(
-                              "hh:mm A"
-                            )}
-                          </Link>
+          <div style={{ height: 640, overflowY: "scroll" }}>
+            {showTimes.cumRapChieu?.map((theaters, index) => {
+              return (
+                <div key={`detail-theater-${index}`}>
+                  <div className="my-3">
+                    <div className="flex md:flex-row md:justify-start flex-col justify-center items-center">
+                      <img
+                        src={theaters.hinhAnh}
+                        alt={theaters.hinhAnh}
+                        className="w-[120px] h-[100px] md:ml-[20px] object-cover"
+                      />
+                      <div className="ml-5">
+                        <p className="text-[1.15rem] font-medium md:leading-[22px] text-white md:text-left text-center md:py-0 py-3">
+                          {theaters.tenCumRap}
+                        </p>
+                        <p
+                          className="text-gray-400 md:text-left text-center"
+                          style={{ marginTop: 0 }}
+                        >
+                          {theaters.diaChi}
+                        </p>
+                        <div className="detail-showtimes grid lg:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 mt-3">
+                          {theaters.lichChieuPhim
+                            ?.slice(0, 12)
+                            .map((detailShowTime, index) => {
+                              return (
+                                <div className="text-white bg-showtime border-solid border-0 rounded-sm p-2 justify-center items-center">
+                                  <Link
+                                    to={`/booking/${detailShowTime.maLichChieu}`}
+                                    key={`order-showTime-${index}`}
+                                    className="col-span-1 font-bold"
+                                  >
+                                    {moment(
+                                      detailShowTime.ngayChieuGioChieu
+                                    ).format("hh:mm A")}
+                                  </Link>
+                                </div>
+                              );
+                            })}
                         </div>
-                      );
-                    })}
+                      </div>
+                    </div>
+                  </div>
+                  <hr
+                    style={{
+                      width: "100%",
+                      color: "rgb(121, 147, 195)",
+                    }}
+                  />
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </TabPane>
       );
     });
@@ -99,37 +100,34 @@ export default function DetailMoviePage() {
 
   return (
     <div
+      className="bg-cover bg-left-center bg-no-repeat min-h-screen min-w-full "
       style={{
         backgroundImage: `url(${movieDetail.hinhAnh})`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "left center",
-        backgroundSize: "cover",
-        minHeight: "100vh",
-        minWidth: "100vw",
       }}
     >
-      <div className="box1" style={{ paddingTop: 150 }}>
+      <div className="box" style={{ paddingTop: 150 }}>
         <div className="grid grid-cols-12">
-          <div className="col-span-8 col-start-2">
+          <div className="col-span-full mx-5 md:mx-0 md:col-span-8 md:col-start-2">
             <div className="grid grid-cols-3">
               <img
                 src={`${movieDetail.hinhAnh}`}
                 alt={`${movieDetail.hinhAnh}`}
-                className="col-span-1"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                className="col-span-1 w-full h-full object-cover"
               />
-              <div
-                className="col-span-2 "
-                style={{ marginTop: "10%", marginLeft: "20px" }}
-              >
-                <p className="text-sm text-green-600 text-bold">
+              <div className="col-span-2 mt-[10%] ml-[20px]">
+                <p
+                  className="text-sm text-bold"
+                  style={{ color: "rgb(216, 74, 70)" }}
+                >
                   Released:{" "}
                   {moment(movieDetail.ngayKhoiChieu).format("MM/DD/YYYY")}
                 </p>
-                <p className="text-2xl text-red-600">{movieDetail.tenPhim}</p>
+                <p className="text-2xl text-white">{movieDetail.tenPhim}</p>
                 <p
-                  className="mt-3"
-                  style={{ fontSize: "15px", lineHeight: "1.5rem" }}
+                  className="mt-3 sm:text-[15px] sm:leading-[1.5rem] text-[13px] leading-5"
+                  style={{
+                    color: "rgb(34, 203, 191)",
+                  }}
                 >
                   {movieDetail.moTa}
                 </p>
@@ -137,11 +135,8 @@ export default function DetailMoviePage() {
             </div>
           </div>
 
-          <div
-            className="col-span-2 flex flex-col justify-center items-center"
-            style={{ marginLeft: "2rem" }}
-          >
-            <p className="text-green-600" style={{ fontSize: "3rem" }}>
+          <div className="col-span-full md:col-span-2 flex flex-row md:flex-col justify-center items-center md:ml-[2rem] mt-5 space-x-5">
+            <p className="text-green-600 lg:text-[2.5rem] md:text-[2rem] text-[1.5rem]">
               RATING
             </p>
             <Progress
@@ -153,27 +148,22 @@ export default function DetailMoviePage() {
               percent={movieDetail.danhGia * 10}
               format={(percent) => `${percent / 10} Score`}
             />
-            <p className="text-yellow-500 text-2xl" style={{ marginTop: "5%" }}>
+            <p className="text-yellow-500 text-2xl md:mt-[5%]">
               <Rate allowHalf value={movieDetail.danhGia / 2} />
             </p>
           </div>
         </div>
 
-        <div className="mt-10 ml-32 w-2/3 container px-5 py-5">
-          <Tabs defaultActiveKey="1" centered>
-            <TabPane tab="Show Times" key="1" style={{ minHeight: 300 }}>
-              <div>
-                <Tabs tabPosition={"left"} className="bg-white">
-                  {renderShowTimesByTheaters()}
-                </Tabs>
-              </div>
-            </TabPane>
-            <TabPane tab="Information" key="2" style={{ minHeight: 300 }}>
-              Information
-            </TabPane>
-            <TabPane tab="Evaluation" key="3" style={{ minHeight: 300 }}>
-              Evaluation
-            </TabPane>
+        <div className="my-10 px-5 py-5 mx-8 lg:mx-16 xl:mx-28">
+          <Tabs
+            defaultActiveKey="1"
+            tabPosition="left"
+            className="h-[640px] w-full"
+            style={{
+              border: "1px solid rgb(121, 147, 195)",
+            }}
+          >
+            {renderShowTimesByTheaters()}
           </Tabs>
         </div>
       </div>

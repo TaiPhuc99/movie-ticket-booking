@@ -4,23 +4,26 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { UserService } from "../../services/userService/UserService";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserAccountAction } from "../../redux/actions/UserAction";
 
-export default function SignUpForm() {
+export default function UpdateUserForm() {
+  const { userAccountInfo } = useSelector((state) => {
+    return state.userReducer;
+  });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      taiKhoan: "",
-      matKhau: "",
-      email: "",
-      soDt: "",
-      hoTen: "",
+      taiKhoan: userAccountInfo.taiKhoan,
+      matKhau: userAccountInfo.matKhau,
+      email: userAccountInfo.email,
+      soDt: userAccountInfo.soDT,
+      maNhom: userAccountInfo.maNhom,
+      maLoaiNguoiDung: userAccountInfo.maLoaiNguoiDung,
+      hoTen: userAccountInfo.hoTen,
     },
     validationSchema: yup.object().shape({
-      taiKhoan: yup
-        .string()
-        .min(6, "At least 6 characters")
-        .max(15, "Maximum 15 characters")
-        .required("*Field is required!"),
       matKhau: yup
         .string()
         .min(6, "At least 6 characters")
@@ -49,17 +52,18 @@ export default function SignUpForm() {
     }),
     onSubmit: (values) => {
       console.log("values", values);
-      UserService.newUserSignUp(values)
+      UserService.updateUserAccount(values)
         .then((res) => {
-          // console.log(res);
-          toast.success("Successfully Sign-Up");
+          //   console.log(res);
+          toast.success("Successfully Updated");
+          dispatch(getUserAccountAction());
           setTimeout(() => {
-            navigate("/sign-in");
+            navigate("/profile");
           }, 1000);
         })
         .catch((err) => {
-          // console.log(err);
-          toast.error("Something went wrong with Sign-Up");
+          //   console.log(err);
+          toast.error("Failed to Update");
           throw err;
         });
     },
@@ -73,10 +77,8 @@ export default function SignUpForm() {
         name="taiKhoan"
         onChange={formik.handleChange}
         value={formik.values.taiKhoan}
+        disabled={true}
       />
-      {formik.errors.taiKhoan && formik.touched.taiKhoan && (
-        <p>{formik.errors.taiKhoan}</p>
-      )}
       <input
         className="p-2 my-2 bg-gray-700 rouded"
         type="password"
@@ -108,6 +110,22 @@ export default function SignUpForm() {
       {formik.errors.soDt && formik.touched.soDt && <p>{formik.errors.soDt}</p>}
       <input
         className="p-2 my-2 bg-gray-700 rouded"
+        placeholder="Username"
+        name="maNhom"
+        onChange={formik.handleChange}
+        value={formik.values.maNhom}
+        disabled={true}
+      />
+      <input
+        className="p-2 my-2 bg-gray-700 rouded"
+        placeholder="Username"
+        name="maLoaiNguoiDung"
+        onChange={formik.handleChange}
+        value={formik.values.maLoaiNguoiDung}
+        disabled={true}
+      />
+      <input
+        className="p-2 my-2 bg-gray-700 rouded"
         placeholder="Full Name"
         name="hoTen"
         onChange={formik.handleChange}
@@ -116,19 +134,7 @@ export default function SignUpForm() {
       {formik.errors.hoTen && formik.touched.hoTen && (
         <p>{formik.errors.hoTen}</p>
       )}
-      <button className="bg-red-600 py-3 my-4 rounded font-bold">
-        Sign Up
-      </button>
-
-      <p className="text-center">
-        <span className="text">
-          Already subscribed to{" "}
-          <span className="text-3 uppercase">Cinemax</span> ?
-        </span>{" "}
-        <Link to="/sign-in">
-          <span className="text-green-600 hover:text-white">Sign-In</span>
-        </Link>
-      </p>
+      <button className="bg-red-600 py-3 my-4 rounded font-bold">Update</button>
     </form>
   );
 }

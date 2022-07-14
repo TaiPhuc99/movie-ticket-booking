@@ -14,10 +14,6 @@ export const movieDetailByTheatersAction = (idMovie) => {
           payload: data.content,
         });
       }
-      dispatch({
-        type: GET_MOVIE_DETAIL_BY_THEATERS,
-        payload: data.content,
-      });
     } catch (error) {
       throw error;
     }
